@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON BLAST — Settings</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="page-wrapper">
+    <button class="btn btn-dim btn-sm back-btn" id="back-btn">← BACK</button>
+
+    <div class="page-title">SETTINGS</div>
+
+    <div class="settings-panel">
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">🔇 MUTE ALL</div>
+          <div class="setting-sub">Silence everything</div>
+        </div>
+        <div class="toggle" id="toggle-mute" onclick="toggleSetting('mute')"></div>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">🎵 MUSIC</div>
+          <div class="setting-sub">Background ambience</div>
+        </div>
+        <div class="toggle" id="toggle-music" onclick="toggleSetting('music')"></div>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">🔊 SOUND FX</div>
+          <div class="setting-sub">Placement & clear sounds</div>
+        </div>
+        <div class="toggle" id="toggle-sfx" onclick="toggleSetting('sfx')"></div>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">🎚 MUSIC VOLUME</div>
+        </div>
+        <input type="range" class="volume-slider" id="vol-music" min="0" max="100" value="40"
+               oninput="setVolume('music', this.value)">
+      </div>
+
+      <div class="setting-row" style="border:none">
+        <div>
+          <div class="setting-label">🔉 SFX VOLUME</div>
+        </div>
+        <input type="range" class="volume-slider" id="vol-sfx" min="0" max="100" value="70"
+               oninput="setVolume('sfx', this.value)">
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/settings.js"></script>
+</body>
+</html>

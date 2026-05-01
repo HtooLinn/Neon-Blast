@@ -1,0 +1,80 @@
+/* ========== MODE SELECT PAGE ========== */
+
+.mode-cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mode-card {
+  width: 220px;
+  padding: 30px 24px;
+  border: 2px solid var(--dim);
+  background: var(--panel);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mode-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  transition: all 0.3s;
+}
+
+.mode-card:hover { transform: translateY(-4px); }
+
+.mode-card.endless::before { background: var(--neon-cyan); }
+.mode-card.endless:hover   { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0,245,255,0.2); }
+
+.mode-card.classic::before { background: var(--neon-pink); }
+.mode-card.classic:hover   { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255,0,110,0.2); }
+
+.mode-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.mode-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.mode-desc {
+  font-size: 0.75rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+/* ========== RESPONSIVE — MODE SELECT ========== */
+
+/* Tablet */
+@media (max-width: 767px) {
+  .mode-cards { gap: 16px; }
+  .mode-card  { width: 200px; padding: 24px 18px; }
+  .mode-icon  { font-size: 2.2rem; margin-bottom: 10px; }
+  .mode-title { font-size: 0.9rem; }
+  .mode-desc  { font-size: 0.7rem; }
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+  .mode-cards { flex-direction: row; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .mode-card  { width: 160px; padding: 20px 14px; }
+  .mode-icon  { font-size: 2rem; margin-bottom: 8px; }
+  .mode-title { font-size: 0.82rem; letter-spacing: 1px; }
+  .mode-desc  { font-size: 0.65rem; }
+}
+
+/* Small phones */
+@media (max-width: 374px) {
+  .mode-card { width: 140px; padding: 16px 10px; }
+  .mode-desc { font-size: 0.6rem; }
+}

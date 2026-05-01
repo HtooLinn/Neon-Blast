@@ -1,0 +1,87 @@
+/* ========== OVERLAY PANEL SYSTEM ========== */
+/* Full-screen dimmed backdrop with a centred panel that slides up on open */
+
+.overlay-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.overlay-panel.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* The white-ish panel box */
+.overlay-panel-box {
+  background: var(--panel);
+  border: 1px solid var(--dim);
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.15), 0 0 80px rgba(0,0,0,0.8);
+  padding: 36px 32px 32px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Slide up animation */
+  transform: translateY(30px);
+  transition: transform 0.3s ease;
+}
+
+.overlay-panel.active .overlay-panel-box {
+  transform: translateY(0);
+}
+
+/* Wide variant for how-to grid */
+.overlay-panel-box--wide {
+  max-width: 700px;
+}
+
+/* Close button — top right corner */
+.panel-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--dim);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.panel-close-btn:hover {
+  color: var(--neon-pink);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 8px rgba(255, 0, 110, 0.3);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 599px) {
+  .overlay-panel-box {
+    padding: 28px 18px 24px;
+    max-height: 90vh;
+  }
+  .overlay-panel-box--wide {
+    max-width: 100%;
+  }
+}

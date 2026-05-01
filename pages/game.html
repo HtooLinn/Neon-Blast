@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON BLAST — Play</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/game.css">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="../css/howto.css">
+  <link rel="stylesheet" href="../css/overlay-panels.css">
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="page-wrapper game-wrapper">
+
+    <!-- In-Game Nav Bar -->
+    <nav class="game-nav">
+      <button class="game-nav-btn home"  onclick="quitGame()">🏠 HOME</button>
+      <div class="game-nav-divider"></div>
+      <button class="game-nav-btn sett"  onclick="openPanel('settings-panel')">⚙ SETTINGS</button>
+      <div class="game-nav-divider"></div>
+      <button class="game-nav-btn howto" onclick="openPanel('howto-panel')">? HOW TO</button>
+      <div class="game-nav-divider"></div>
+      <button class="game-nav-btn" id="btn-mute-game" onclick="toggleMuteGame()">🔊 SOUND</button>
+    </nav>
+
+    <!-- Score Header -->
+    <div class="game-header">
+      <div class="score-box">
+        <div class="score-label">SCORE</div>
+        <div class="score-value" id="score-display">0</div>
+      </div>
+      <div class="game-center-info">
+        <div class="level-badge" id="level-display">ENDLESS</div>
+        <div class="heart-counter" id="heart-display" style="display:none">
+          💖 <span id="heart-count">0</span>/<span id="heart-target">0</span>
+        </div>
+        <div class="move-counter" id="move-display" style="display:none">
+          ⚡ <span id="move-count">0</span> MOVES LEFT
+        </div>
+      </div>
+      <div class="score-box" id="best-box">
+        <div class="score-label">BEST</div>
+        <div class="score-value" id="best-display">0</div>
+      </div>
+      <div class="score-box" id="stars-box" style="display:none">
+        <div class="score-label">STARS</div>
+        <div class="stars-display" id="stars-display">☆☆☆</div>
+      </div>
+    </div>
+
+    <!-- Board + Pieces -->
+    <div class="board-and-pieces">
+      <div class="board-wrapper">
+        <div id="board"></div>
+      </div>
+      <div class="pieces-area" id="pieces-area"></div>
+    </div>
+
+  </div>
+
+  <!-- Win/Lose Overlay -->
+  <div id="overlay">
+    <div class="overlay-box" id="overlay-box">
+      <div class="overlay-icon"  id="overlay-icon">🏆</div>
+      <div class="overlay-title" id="overlay-title">GAME OVER</div>
+      <div class="overlay-sub"   id="overlay-sub"></div>
+      <div class="overlay-btns"  id="overlay-btns"></div>
+    </div>
+  </div>
+
+  <!-- Drag Ghost -->
+  <div id="drag-ghost"></div>
+
+  <!-- ── SETTINGS OVERLAY PANEL ── -->
+  <div class="overlay-panel" id="settings-panel">
+    <div class="overlay-panel-box">
+      <button class="panel-close-btn" onclick="closePanel('settings-panel')">✕ CLOSE</button>
+      <div class="page-title" style="margin-bottom:24px">SETTINGS</div>
+      <div class="settings-panel">
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">🔇 MUTE ALL</div>
+            <div class="setting-sub">Silence everything</div>
+          </div>
+          <div class="toggle" id="toggle-mute" onclick="toggleSetting('mute')"></div>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">🎵 MUSIC</div>
+            <div class="setting-sub">Background ambience</div>
+          </div>
+          <div class="toggle" id="toggle-music" onclick="toggleSetting('music')"></div>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">🔊 SOUND FX</div>
+            <div class="setting-sub">Placement & clear sounds</div>
+          </div>
+          <div class="toggle" id="toggle-sfx" onclick="toggleSetting('sfx')"></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">🎚 MUSIC VOLUME</div></div>
+          <input type="range" class="volume-slider" id="vol-music" min="0" max="100" value="40"
+                 oninput="setVolume('music', this.value)">
+        </div>
+        <div class="setting-row" style="border:none">
+          <div><div class="setting-label">🔉 SFX VOLUME</div></div>
+          <input type="range" class="volume-slider" id="vol-sfx" min="0" max="100" value="70"
+                 oninput="setVolume('sfx', this.value)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HOW TO PLAY OVERLAY PANEL ── -->
+  <div class="overlay-panel" id="howto-panel">
+    <div class="overlay-panel-box overlay-panel-box--wide">
+      <button class="panel-close-btn" onclick="closePanel('howto-panel')">✕ CLOSE</button>
+      <div class="page-title" style="margin-bottom:24px">HOW TO PLAY</div>
+      <div class="howto-grid">
+        <div class="howto-card">
+          <h3>📦 PLACING BLOCKS</h3>
+          <p>Drag pieces from the bottom tray onto the 8×8 grid. A piece can only be placed if all its cells fit on empty squares. No rotation — plan strategically!</p>
+        </div>
+        <div class="howto-card pink">
+          <h3>🔥 CLEARING LINES</h3>
+          <p>Fill an entire row OR column to clear it and earn bonus points. Clearing multiple lines at once gives a big score multiplier!</p>
+        </div>
+        <div class="howto-card green">
+          <h3>💖 HEARTS (CLASSIC)</h3>
+          <p>Some grid squares contain hearts. Place a block on a heart square to embed it. When that row or column clears, the heart is collected toward your level goal.</p>
+        </div>
+        <div class="howto-card purple">
+          <h3>🎯 CLASSIC MODE</h3>
+          <p>Each level has a heart target and a move limit. Collect the required hearts before running out of moves to advance. Each level gets harder!</p>
+        </div>
+        <div class="howto-card">
+          <h3>♾️ ENDLESS MODE</h3>
+          <p>Play forever and keep increasing your score. The game ends when no piece can be placed on the board. Try to beat your personal best!</p>
+        </div>
+        <div class="howto-card pink">
+          <h3>🏆 SCORING</h3>
+          <p>+1 per block placed. +10 × blocks per cleared line. +25 bonus per heart collected. Chain clears for multipliers!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/game.js"></script>
+  <script>
+    function openPanel(id) {
+      if (id === 'settings-panel') {
+        document.getElementById('toggle-mute').classList.toggle('on', settings.mute);
+        document.getElementById('toggle-music').classList.toggle('on', settings.music);
+        document.getElementById('toggle-sfx').classList.toggle('on', settings.sfx);
+        document.getElementById('vol-music').value = Math.round(settings.volMusic * 100);
+        document.getElementById('vol-sfx').value   = Math.round(settings.volSfx * 100);
+      }
+      document.getElementById(id).classList.add('active');
+    }
+    function closePanel(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+    document.querySelectorAll('.overlay-panel').forEach(function(panel) {
+      panel.addEventListener('click', function(e) {
+        if (e.target === panel) closePanel(panel.id);
+      });
+    });
+  </script>
+</body>
+</html>

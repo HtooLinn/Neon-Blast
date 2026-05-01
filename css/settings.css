@@ -1,0 +1,102 @@
+/* ========== SETTINGS PAGE ========== */
+
+.settings-panel {
+  background: var(--panel);
+  border: 1px solid var(--dim);
+  padding: 30px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(74,74,122,0.4);
+}
+
+.setting-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.setting-sub {
+  font-size: 0.65rem;
+  color: var(--dim);
+  margin-top: 2px;
+}
+
+/* Toggle Switch */
+.toggle {
+  width: 48px; height: 26px;
+  background: var(--dim);
+  border-radius: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+.toggle.on {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px #00f5ff, 0 0 20px #00f5ff44;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  left: 2px; top: 2px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.3s;
+}
+.toggle.on::after { transform: translateX(22px); }
+
+/* Volume Slider */
+.volume-slider {
+  -webkit-appearance: none;
+  width: 140px; height: 4px;
+  background: var(--dim);
+  border-radius: 2px;
+  outline: none;
+}
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  cursor: pointer;
+  box-shadow: 0 0 8px #00f5ff, 0 0 20px #00f5ff44;
+}
+
+/* ========== RESPONSIVE — SETTINGS ========== */
+
+/* Tablet */
+@media (max-width: 767px) {
+  .settings-panel { padding: 24px 20px; max-width: 380px; }
+  .setting-label  { font-size: 0.65rem; }
+  .volume-slider  { width: 120px; }
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+  .settings-panel { padding: 20px 16px; max-width: 100%; width: calc(100% - 24px); gap: 14px; }
+  .setting-row    { padding: 10px 0; }
+  .setting-label  { font-size: 0.62rem; letter-spacing: 1.5px; }
+  .setting-sub    { font-size: 0.58rem; }
+  .volume-slider  { width: 100px; }
+  .toggle         { width: 42px; height: 22px; }
+  .toggle::after  { width: 16px; height: 16px; }
+  .toggle.on::after { transform: translateX(20px); }
+}
+
+/* Small phones */
+@media (max-width: 374px) {
+  .settings-panel { padding: 16px 12px; gap: 10px; }
+  .volume-slider  { width: 80px; }
+}

@@ -1,0 +1,81 @@
+/* ========== LEVEL SELECT PAGE ========== */
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.level-btn {
+  width: 84px; height: 88px;
+  border: 2px solid var(--dim);
+  background: var(--panel);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.level-btn .lnum {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.level-btn:hover {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 15px rgba(255,0,110,0.3);
+  transform: scale(1.05);
+}
+
+.level-btn.completed {
+  border-color: var(--neon-green);
+  background: rgba(0,255,136,0.08);
+}
+.level-btn.completed .lnum { color: var(--neon-green); }
+
+
+/* ========== RESPONSIVE — LEVEL SELECT ========== */
+
+/* Tablet */
+@media (max-width: 767px) {
+  .level-grid { gap: 10px; }
+  .level-btn  { width: 72px; height: 72px; }
+  .level-btn .lnum { font-size: 1.1rem; }
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+  .level-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .level-btn  { width: 68px; height: 68px; }
+  .level-btn .lnum  { font-size: 1rem; }
+  .level-btn .lheart { font-size: 0.58rem; }
+}
+
+/* Small phones */
+@media (max-width: 374px) {
+  .level-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .level-btn  { width: 58px; height: 58px; }
+  .level-btn .lnum { font-size: 0.9rem; }
+}
+
+/* ========== LEVEL STARS ========== */
+.lstars {
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 8px var(--neon-yellow), 0 0 16px var(--neon-yellow);
+  line-height: 1;
+}
+
+.lstars-empty {
+  color: #3a3a5a;
+  text-shadow: none;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+}
